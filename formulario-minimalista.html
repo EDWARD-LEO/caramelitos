@@ -13,8 +13,8 @@
 <body>
 
   <div class="container mt-2">
-    <h1>Modales BS5</h1>
-    <strong>Construcción de modal y formulario, se controlan eventos de entrada y salida</strong>
+    <h1>Formulario minimalista BS5</h1>
+    <strong>Construcción de modal y formulario minimalista, se controlan eventos de entrada y salida</strong>
     [ <a href="./index.html">Volver</a> ]
     <hr>
 
@@ -23,8 +23,15 @@
     Mostrar modal
   </button>
 
+  <style>
+    .input-group > span{
+      width: 2.5rem;
+      text-align: center;
+    }
+  </style>
+
   <!-- Modal -->
-  <div class="modal fade" id="modal-productos" tabindex="-1">
+  <div class="modal fade" id="modal-productos" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-primary text-light">
@@ -33,31 +40,32 @@
         </div>
         <div class="modal-body">
           <form action="" id="formulario-productos">
-            <div class="mb-3">
-              <label for="nombre" class="form-label">Nombre del producto:</label>
-              <input type="text" class="form-control form-control-sm" id="nombre">
+            <div class="input-group mb-3">
+              <span class="input-group-text"><i class="fa-sharp fa-solid fa-bottle-droplet"></i></span>
+              <input type="text" class="form-control " id="nombre" placeholder="Nombre del producto">
             </div>
-            <div class="mb-3">
-              <label for="descripcion" class="form-label">Descripción:</label>
-              <textarea id="descripcion" rows="3" class="form-control form-control-sm"></textarea>
+            <div class="input-group mb-3">
+              <span class="input-group-text"><i class="fa-solid fa-file-lines"></i></span>
+              <textarea id="descripcion" rows="3" class="form-control " placeholder="Descripción"></textarea>
             </div>
-            <div class="mb-3">
-              <label for="garantia" class="form-label">Garantía:</label>
-              <select id="garantia" class="form-select form-select-sm">
-                <option value="0">Ninguna</option>
+            <div class="input-group mb-3">
+              <span class="input-group-text"><i class="fa-sharp fa-solid fa-shield"></i></span>
+              <select id="garantia" class="form-select">
+                <option value="0">Seleccione garantía</option>
                 <option value="6">Medio año</option>
                 <option value="12">1 año</option>
                 <option value="24">2 años</option>
                 <option value="36">3 años</option>
               </select>
             </div>
-            <div class="mb-3">
-              <label for="fecha-vencimiento" class="form-label">Fecha vencimiento:</label>
-              <input type="date" class="form-control form-control-sm" id="fecha-vencimiento">
+            <small>Fecha de vencimiento</small>
+            <div class="input-group mb-3">
+              <span class="input-group-text"><i class="fa-sharp fa-regular fa-calendar-days"></i></span>
+              <input type="date" class="form-control " id="fecha-vencimiento">
             </div>
-            <div class="mb-3">
-              <label for="precio" class="form-label">Precio:</label>
-              <input type="text" class="form-control form-control-sm text-end" id="precio" placeholder="S/ 0">
+            <div class="input-group mb-3">
+              <span class="input-group-text"><i class="fa-solid fa-sack-dollar"></i></span>
+              <input type="text" class="form-control  text-end" id="precio" placeholder="Precio S/ 0">
             </div>
           </form>
         </div>
@@ -71,6 +79,8 @@
 
   </div>
 
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/2927838564.js" crossorigin="anonymous"></script>
 
   <!-- JS para BS5 -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
