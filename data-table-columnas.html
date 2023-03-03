@@ -11,26 +11,24 @@
 
   <!-- Datatable for BS5 -->
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.3/css/dataTables.bootstrap5.min.css">
+  
+  <!-- Datatable for BS5 - Selector de columnas -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.5/css/buttons.dataTables.min.css">
+
+  <!-- Datatable for BS5 - Responsive -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.dataTables.min.css">
 
 </head>
 <body>
   <div class="container mt-2">
     <h2>Módulo Proveedores</h2>
-    <strong>Agregaremos a nuestro DataTable la capacidad de exportar en diferentes formatos</strong>
+    <strong>Además de controlar opciones para exportar, ahora se podrá decidir las columnas con las que se trabajará</strong>
 
     <hr>
 
-    <table class="table table-striped" id="tabla-proveedores">
+    <table class="display responsive table table-striped" id="tabla-proveedores" style="width: 100%">
       <!-- Configuración de columnas -->
-      <colgroup>
-        <col width="5%">  <!-- ID -->
-        <col width="30%"> <!-- Datos proveedor -->
-        <col width="15%"> <!-- País -->
-        <col width="20%"> <!-- Email -->
-        <col width="10%"> <!-- Teléfono -->
-        <col width="10%"> <!-- Estado -->
-        <col width="10%"> <!-- Comandos -->
-      </colgroup>
+      <!-- La configuración con <colgroup></colgroup> queda anulada -->
       <thead>
         <tr class="table-info">
           <th>#</th>
@@ -68,6 +66,12 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
   <script src="https://cdn.datatables.net/buttons/2.3.5/js/buttons.html5.min.js"></script>
   <script src="https://cdn.datatables.net/buttons/2.3.5/js/buttons.print.min.js"></script>
+
+  <!-- Datatable for BS5 - Manejo de columnas -->
+  <script src="https://cdn.datatables.net/buttons/2.3.5/js/buttons.colVis.min.js"></script>
+
+  <!-- Datatable for BS5 - Responsive -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js">
   
   <script>
     $(document).ready(function (){
@@ -90,31 +94,29 @@
       function buildTableV2(){
         $("#tabla-proveedores").DataTable({
           dom: 'Bfrtip',
+          responsive: true,
           buttons: [
-            {
-              extend: 'copy',
-              text: '<i class="fa-regular fa-copy"></i> Copiar contenido',
-              className: 'btn btn-sm btn-primary'
-            },
-            {
-              extend: 'csv',
-              text: '<i class="fa-sharp fa-solid fa-file-csv"></i> CSV',
-              className: 'btn btn-sm btn-primary'
-            },
             {
               extend: 'excel',
               text: '<i class="fa-sharp fa-solid fa-table"></i> Office Excel',
-              className: 'btn btn-sm btn-primary'
-            },
-            {
-              extend: 'pdf',
-              text: '<i class="fa-sharp fa-solid fa-file-pdf"></i> PDF',
-              className: 'btn btn-sm btn-danger'
+              className: 'btn btn-sm btn-primary',
+              title: "Reporte de Proveedores",
+              exportOptions: {
+                columns: [0,1,2,3,4]
+              }
             },
             {
               extend: 'print',
               text: '<i class="fa-solid fa-print"></i> Imprimir',
-              className: 'btn btn-sm btn-secondary'
+              className: 'btn btn-sm btn-secondary',
+              title: "Informe de Proveedores",
+              exportOptions: {
+                columns: ":visible"
+              }
+            },
+            {
+              extend: 'colvis',
+              text: '<i class="fa-solid fa-table-columns"></i> Columnas visibles'
             }
           ],
           language: {
@@ -139,7 +141,7 @@
             $("#aviso-carga").addClass("invisible");
           },
           complete: function(){
-            buildTable();
+            buildTableV2();
           }
         });
       }
